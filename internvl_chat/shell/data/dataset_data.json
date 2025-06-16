@@ -1,0 +1,10 @@
+{
+  "sharegpt4v_instruct_gpt4-vision_cap100k": {
+    "root": "/mnt/ma_disk/dataset_images/",
+    "annotation": "/mnt/ma_disk/dataset_images/conversation_dataset_ir.jsonl",
+    "data_augment": false,
+    "max_dynamic_patch": 12,
+    "repeat_time": 1,
+    "length": 5096
+  }
+}

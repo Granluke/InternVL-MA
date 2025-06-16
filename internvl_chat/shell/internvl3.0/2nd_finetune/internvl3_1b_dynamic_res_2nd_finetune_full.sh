@@ -1,12 +1,19 @@
 set -x
 
-GPUS=${GPUS:-8}
+echo “\$CONDA_DEFAULT_ENV: $CONDA_DEFAULT_ENV”     # should be “internvl3”
+echo “python → $(which python)”                   
+echo “python exec → $(python -c 'import sys;print(sys.executable)')”
+export PATH="$CONDA_PREFIX/bin:$HOME/.local/bin:$PATH"
+echo “torchrun → $(which torchrun)”
+echo “PATH → $PATH”
+
+GPUS=1
 BATCH_SIZE=${BATCH_SIZE:-128}
 PER_DEVICE_BATCH_SIZE=${PER_DEVICE_BATCH_SIZE:-4}
 GRADIENT_ACC=$((BATCH_SIZE / PER_DEVICE_BATCH_SIZE / GPUS))
 
 
-export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+export PYTHONPATH="${PYTHONPATH}:$(pwd)/internvl_chat"
 export MASTER_PORT=34229
 export TF_CPP_MIN_LOG_LEVEL=3
 export LAUNCHER=pytorch
@@ -29,11 +36,11 @@ torchrun \
   --nproc_per_node=${GPUS} \
   --master_port=${MASTER_PORT} \
   internvl/train/internvl_chat_finetune.py \
-  --model_name_or_path "OpenGVLab/InternVL3-1B" \
+  --model_name_or_path "./pretrained/InternVL3-1B" \
   --conv_style "internvl2_5" \
   --use_fast_tokenizer False \
   --output_dir ${OUTPUT_DIR} \
-  --meta_path "./shell/data/internvl_1_2_finetune_custom.json" \
+  --meta_path "./shell/data/dataset_data.json" \
  --overwrite_output_dir True \
   --force_image_size 448 \
   --max_dynamic_patch 12 \
