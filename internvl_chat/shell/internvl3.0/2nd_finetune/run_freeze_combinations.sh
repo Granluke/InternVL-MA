@@ -11,7 +11,7 @@ echo "torchrun -> $(which torchrun)"
 echo "PATH -> $PATH"
 
 GPUS=8
-BATCH_SIZE=64 #${BATCH_SIZE:-128}
+BATCH_SIZE=32 #${BATCH_SIZE:-128}
 PER_DEVICE_BATCH_SIZE=1 #${PER_DEVICE_BATCH_SIZE:-4}
 GRADIENT_ACC=$((BATCH_SIZE / PER_DEVICE_BATCH_SIZE / GPUS))
 
@@ -27,7 +27,10 @@ for freeze_llm in True False; do
     for freeze_backbone in True False; do
       if { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "False" ]; } || \
          { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "True" ]; } || \
-         { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "True" ] && [ "$freeze_backbone" = "False" ]; }; then
+         { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "True" ] && [ "$freeze_backbone" = "False" ]; } || \
+         { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "True" ]  && [ "$freeze_backbone" = "True" ];  } || \
+         { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "True" ];  } || \
+         { [ "$freeze_llm" = "True" ]  && [ "$freeze_mlp" = "True" ]  && [ "$freeze_backbone" = "True" ];  }; then
         echo "Skip freeze_llm=${freeze_llm} freeze_mlp=${freeze_mlp} freeze_backbone=${freeze_backbone} (already run)"
         continue
       fi
