@@ -25,7 +25,9 @@ BASE_OUTPUT_DIR='work_dirs/internvl_chat_v3'
 for freeze_llm in True False; do
   for freeze_mlp in True False; do
     for freeze_backbone in True False; do
-      if [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "False" ]; then
+      if { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "False" ]; } || \
+         { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "True" ]; } || \
+         { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "True" ] && [ "$freeze_backbone" = "False" ]; }; then
         echo "Skip freeze_llm=${freeze_llm} freeze_mlp=${freeze_mlp} freeze_backbone=${freeze_backbone} (already run)"
         continue
       fi
