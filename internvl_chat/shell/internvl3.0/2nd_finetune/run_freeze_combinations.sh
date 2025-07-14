@@ -11,7 +11,7 @@ echo "torchrun -> $(which torchrun)"
 echo "PATH -> $PATH"
 
 GPUS=4
-BATCH_SIZE=${BATCH_SIZE:-128}
+BATCH_SIZE=64 #${BATCH_SIZE:-128}
 PER_DEVICE_BATCH_SIZE=${PER_DEVICE_BATCH_SIZE:-4}
 GRADIENT_ACC=$((BATCH_SIZE / PER_DEVICE_BATCH_SIZE / GPUS))
 
@@ -70,7 +70,7 @@ for freeze_llm in True False; do
         --warmup_ratio 0.03 \
         --lr_scheduler_type "cosine" \
         --logging_steps 1 \
-        --max_seq_length 16384 \
+        --max_seq_length 8192 \
         --do_train True \
         --grad_checkpoint True \
         --group_by_length True \
