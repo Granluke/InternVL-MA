@@ -29,6 +29,8 @@ for freeze_llm in True False; do
          { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "True" ] && [ "$freeze_backbone" = "False" ]; } || \
          { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "True" ]  && [ "$freeze_backbone" = "True" ];  } || \
          { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "True" ];  } || \
+         { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "True" ]  && [ "$freeze_backbone" = "False" ];  } || \
+         { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "False" ];  } || \
          { [ "$freeze_llm" = "True" ]  && [ "$freeze_mlp" = "True" ]  && [ "$freeze_backbone" = "True" ];  }; then
         echo "Skip freeze_llm=${freeze_llm} freeze_mlp=${freeze_mlp} freeze_backbone=${freeze_backbone} (already run)"
         continue
