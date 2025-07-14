@@ -10,7 +10,7 @@ export PATH="$CONDA_PREFIX/bin:$HOME/.local/bin:$PATH"
 echo "torchrun -> $(which torchrun)"
 echo "PATH -> $PATH"
 
-GPUS=4
+GPUS=8
 BATCH_SIZE=64 #${BATCH_SIZE:-128}
 PER_DEVICE_BATCH_SIZE=${PER_DEVICE_BATCH_SIZE:-4}
 GRADIENT_ACC=$((BATCH_SIZE / PER_DEVICE_BATCH_SIZE / GPUS))
