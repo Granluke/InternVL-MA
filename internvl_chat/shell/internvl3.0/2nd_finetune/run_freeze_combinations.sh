@@ -25,8 +25,7 @@ BASE_OUTPUT_DIR='work_dirs/internvl_chat_v3'
 for freeze_llm in True False; do
   for freeze_mlp in True False; do
     for freeze_backbone in True False; do
-      if { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "False" ]; } || \
-         { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "True" ]; } || \
+      if { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "True" ]; } || \
          { [ "$freeze_llm" = "True" ] && [ "$freeze_mlp" = "True" ] && [ "$freeze_backbone" = "False" ]; } || \
          { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "True" ]  && [ "$freeze_backbone" = "True" ];  } || \
          { [ "$freeze_llm" = "False" ] && [ "$freeze_mlp" = "False" ] && [ "$freeze_backbone" = "True" ];  } || \
