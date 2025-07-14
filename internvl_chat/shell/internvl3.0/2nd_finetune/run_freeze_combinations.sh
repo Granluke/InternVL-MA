@@ -39,7 +39,7 @@ for freeze_llm in True False; do
         --master_addr=127.0.0.1 \
         --nproc_per_node=${GPUS} \
         --master_port=${MASTER_PORT} \
-        internvl_chat/internvl/train/internvl_chat_finetune.py \
+        internvl/train/internvl_chat_finetune.py \
         --model_name_or_path "./pretrained/InternVL3-8B" \
         --conv_style "internvl2_5" \
         --use_fast_tokenizer False \
